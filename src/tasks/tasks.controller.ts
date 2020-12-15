@@ -1,31 +1,19 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
-import { TasksService } from './tasks.service';
+import { Controller, Get, Post, Body } from "@nestjs/common";
+import { TasksService } from "./tasks.service";
 import { Task } from "./task.modal";
+import { CreateTaskDto } from "./dto/create-task.dto";
 
-@Controller('tasks')
+@Controller("tasks")
 export class TasksController {
+  constructor(private taskService: TasksService) {}
 
+  @Get()
+  getAllTasks(): Task[] {
+    return this.taskService.getAllTasks();
+  }
 
-    constructor(private taskService: TasksService) {
-
-
-    }
-
-    @Get()
-    getAllTasks(): Task[] {
-
-        return this.taskService.getAllTasks()
-    }
-
-    @Post()
-    createTask(@Body() body): Task {
-
-
-        const { title, description } = body
-
-        return this.taskService.createTask(title, description)
-
-    }
-
-
+  @Post()
+  createTask(@Body() createTaskDto: CreateTaskDto): Task {
+    return this.taskService.createTask(createTaskDto);
+  }
 }
