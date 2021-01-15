@@ -3,7 +3,6 @@ import {
   MinLength,
   MaxLength,
   Matches,
-  minLength
 } from "class-validator";
 
 export class AuthCredentialsDto {
